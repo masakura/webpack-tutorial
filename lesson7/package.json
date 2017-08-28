@@ -1,0 +1,15 @@
+{
+  "name": "lesson7",
+  "version": "1.0.0",
+  "description": "ここまでは自分で書いた JavaScript/CSS ファイルを取り込みましたが、npmjs レジストリに登録されているライブラリ (今回は React) を取り込みます。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}

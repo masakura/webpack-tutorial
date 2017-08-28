@@ -1,5 +1,55 @@
-# 他の JavaScript ファイルを読み込む
+# JavaScript ファイルを取り込む!
 ここまで `entry.js` ファイル一つしか使ってません! 全然面白くありません! というわけで、他の JavaScript ファイルを読み込みます。
+
+
+## webpack のない世界
+webpack がない場合、複数の JavaScript ファイルを使う時はこんな感じでした。
+
+[index.html](./index.html)。
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 4</title>
+</head>
+<body>
+<script src="entry.js"></script>
+<script src="sample.js"></script>
+</body>
+</html>
+```
+
+[entry.js](./entry.js)。
+
+```javascript
+document.write("It works.");
+```
+
+[sample.js](./sample.js)。
+
+```javascript
+document.write('Hello, sample!');
+```
+
+ブラウザーで開いてください。(面白くもなんともないと思いますが...)
+
+
+## 準備
+webpack を使う準備をします。
+
+```javascript
+module.exports = {
+  entry: './entry.js',
+  output: {
+    path: __dirname,
+    filename: 'bundle.js',
+  },
+};
+```
+
+webpack ではファイルを一つにまとめてますので、[index.html](./index.html) ファイルも bundle.js ファイルのみを読み込むよう書き換えます。
 
 ```html
 <!DOCTYPE html>
@@ -9,52 +59,32 @@
     <title>Lesson 1</title>
 </head>
 <body>
-<script src="entry.js"></script>
-<script src="sample.js"></script>
+<script src="bundle.js"></script>
 </body>
 </html>
 ```
 
-```javascript
-// entry.js
-document.write("It works.");
-```
+
+## 単純に読み込む
+まずは単純に読み込むところから!
+
+[entry.js](./entry.js) から [sample.js](./sample.js) を読み込むよう、[entry.js](./entry.js) ファイルを修正します。
 
 ```javascript
-// sample.js
-document.write('Hello, sample!');
-```
-
-まずは [index.html](./index.html) ファイルをブラウザーで開いてください。`JavaScript ファイル二つとも処理されています。
-
-
-## 他のファイルを読み込む
-webpack を使うと、JavaScript ファイルから他の JavaScript ファイルを読み込めるようになります。
-
-```javascript
-// entry.js
 document.write("It works.");
 
 import './sample.js';
 ```
 
-index.html ファイルも修正します。
-
-```html
-<!-- <script src="entry.js"></script> -->
-<!-- <script src="sample.js"></script> -->
-<script src="bundle.js"></script>
-```
-
 `webpack-dev-server --open` を実行してください。
 
-書き換える前と同じようにブラウザーに表示されました!
-
-`import` を使って読み込むことができますが、相対パスを使う場合は `./` を忘れないようにしてください。
+書き換える前と同じようにブラウザーに表示されました! (何も変わってなくて面白くないかもしれませんが、何も変わらないのがすごいところです)
 
 
 ## 関数のインポート
 他の JavaScript ファイルを読み込めるようになりましたが、他の JavaScript ファイルで宣言されている関数を使うためにはもう一工夫必要です。
+
+関数を含めたファイル [functions.js](./functions.js) ファイルを用意します。
 
 ```javascript
 // functions.js
@@ -63,8 +93,9 @@ export default function someMethod () {
 };
 ```
 
+[entry.js](./entry.js) を修正して関数を使います。
+
 ```javascript
-// entry.js
 import someMethod from './functions.js';
 
 document.write("It works.");
@@ -72,14 +103,15 @@ document.write("It works.");
 document.write(someMethod());
 ```
 
-`export default` で関数を公開 (他の JavaScript からでも使えるように) し、`import` で公開された関数を取り込みます。
+`export default` で関数を公開 (他の JavaScript からでも使えるように) し、`import` で公開された関数を取り込んで使えるようになります。
 
 
 ## クラスのインポート
 関数のインポートと同じです。
 
+[classes.js](./classes.js) ファイルを用意します。
+
 ```javascript
-// classes.js
 export default class SomeClass {
   someMethod () {
     return 'Hello!';
@@ -87,8 +119,9 @@ export default class SomeClass {
 };
 ```
 
+[entry.js](./entry.js) ファイルを修正してクラスを使います。
+
 ```javascript
-// entry.js
 import SomeClass from './classes.js';
 
 document.write("It works.");
@@ -98,8 +131,19 @@ document.write(some.someMethod());
 ```
 
 
-## 名前付きエクスポート (参考)
-今までの例ではデフォルトエクスポートという、一つのファイルにつき一つのエクスポートを使いました。名前を使うことで、複数のエクスポートができます。
+## おまけ
+### import のファイルの指定
+import で相対パスを使う場合は必ず `./` をつけてください。
+
+```javascript
+import './foo'; // このファイルと同じ場所にある foo.js ファイル
+import './foo.js'; // このファイルと同じ場所にある foo.js ファイル
+import 'foo'; // インストールされた foo モジュール (Lesson 7 でやります)
+```
+
+
+### 名前付きエクスポート
+ここではデフォルトエクスポートという、一つのファイルにつき一つのエクスポートを使いました。名前を使うことで、複数のエクスポートができます。
 
 ```javascript
 // exports.js
