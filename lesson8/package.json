@@ -1,5 +1,5 @@
 {
-  "name": "lesson7",
+  "name": "lesson8",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,5 +10,9 @@
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^3.5.5"
   }
 }

@@ -32,7 +32,6 @@ module.exports = {
 [main.css](./main.css) ファイルを用意します。
 
 ```css
-/* main.css */
 body {
   background-color: aqua;
 }

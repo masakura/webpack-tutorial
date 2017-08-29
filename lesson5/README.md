@@ -32,7 +32,7 @@ npm install --save-dev babel-loader
 
 ```javascript
   module: {
-    loaders: [
+    rules: [
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' },
     ],
   },
@@ -71,7 +71,19 @@ npm install --save babel-polyfill
 ## 取り込む
 折角ですので ES2017 で追加された async/await を使ってみましょう! (よくわからない方は、async/await が ES2017 の新機能で、使えないブラウザー用に Babel で ES5 に変換しているのがわかれば OK です)
 
-[.babelrc](./.babelrc) に Babel の設定を書きましたけど、`webpack.config.js` に書く方法もあります。個人的には `.babelrc` おすすめです。
+[entry.js](./entry.js) ファイルを用意します。
+
+```javascript
+import wait from './wait.js';
+
+(async () => {
+  await wait(1000);
+
+  alert('1000 ミリ秒待ったよ!');
+})();
+```
+
+`webpack-dev-server --open` で実行します。ちょっと待つとポップアップが表示されるます。
 
 
 ## 解説

@@ -14,4 +14,5 @@
 | [Lesson 5 babel-loader でトランスパイル!](./lesson5) | Babel トランスパイラーを呼び出す babel-loader で ES6+ を ES5 に変換! 
 | [Lesson 6 CSS も取り込む!](./lesson6) | webpack は JavaScript だけでなく、CSS や他の形式のファイルも取り込めます!
 | [Lesson 7 React を取り込む](./lesson7) | 外部ライブラリ react を取り込みます。依存関係を見て、必要なものをすべて取り込んでくれます!
-| [Lesson 8 Foundation site を取り込む](./lesson8) | Foundation のような CSS フレームワークも取り込めます! ちょっと大変だけど。
+| [Lesson 8 プラグインで圧縮](./lesson8) | 圧縮ももちろんできます!
+| [Lesson 9 Foundation sites を取り込む](./lesson9) | Foundation のような CSS フレームワークも取り込めます! ちょっと大変だけど。
