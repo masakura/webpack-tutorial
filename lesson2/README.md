@@ -5,7 +5,6 @@
 設定ファイル [webpack.config.js](./webpack.config.js) ファイルを用意します。
 
 ```javascript
-// webpack.config.js
 module.exports = {
   entry: './entry.js',
   output: {

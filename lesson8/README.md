@@ -11,6 +11,15 @@ npm install --save-dev uglifyjs-webpack-plugin webpack
 
 [webpack.config.js](./webpack.config.js) ファイルを用意います。
 
+```javascript
+module.exports = {
+  entry: './entry.js',
+  output: {
+    path: __dirname,
+    filename: 'bundle.min.js',
+  },
+};
+```
 
 ## 圧縮する
 未圧縮のものと比較するために webpack コマンドで圧縮されていない bundle.js を作ります。
@@ -19,7 +28,9 @@ npm install --save-dev uglifyjs-webpack-plugin webpack
 webpack
 ```
 
-出来上がった [bundle.js](./bundle.js) ファイルを開いてください。
+出来上がった [bundle.js](./bundle.js) ファイルを開いて圧縮されていないことを確認します。
+
+今度は圧縮します。
 
 [webpack.config.js](./webpack.config.js) ファイルにプラグインを追加します。ついでにファイル名も変更しています。
 
